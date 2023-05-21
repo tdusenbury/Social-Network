@@ -6,7 +6,7 @@ module.exports = {
 //createThought
     createThought(req, res) {
         Thought.create(req.body)
-            .then((thought) => res.json(thought))
+            .then((user) => res.json(user))
             .catch((err) => {
                 console.log(err);
                 return res.status(500).json(err);
@@ -38,11 +38,12 @@ module.exports = {
             { $set: req.body },
             { runValidators: true, new: true }
         )
-            .then((course) =>
-            !course
+            .then((thought) =>
+            !thought
                 ? res.status(404).json({ message: 'No thought with this ID'})
-                : res.json(course)
+                : res.json(thought)
             )
+            .catch((err) => res.status(500).json(err));
     },
 
 //deleteThought
@@ -68,7 +69,6 @@ module.exports = {
             });
         }, 
         
-
 //addReaction
     addReaction(req, res) {
         console.log('You have added a reaction');
