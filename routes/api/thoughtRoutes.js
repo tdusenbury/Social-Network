@@ -16,11 +16,11 @@ router.route('/').get(getAllThoughts).post(createThought);
 
 //api/:thoughtId/reaction = post.addReaction
 
-router.route('./:thoughtId/reactions').post(addReaction);
+router.route('/:thoughtId/reactions').post(addReaction);
 
 //api/users/:userId/reactions/:reactionId
 
-router.route('./:thoughtId/reactions/:reactionId').delete(deleteReaction);
+router.route('/:thoughtId/reactions/:reactionId').delete(deleteReaction);
 
 //api/thoughts/:thoughtId = get.getSingleThought & put.updateThought & delete.deleteThought
 
