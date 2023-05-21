@@ -2,32 +2,7 @@ const { Schema, model } = require('mongoose');
 const moment = require('moment');
 
 
-const thoughtSchema = new Schema(
-    {
-        thoughtText: {
-            type: String,
-            required: true,
-            maxLength: 280,
-            minLength: 1,
-        },
-
-        createdAt: {
-            type: Date,
-            default: Date.now,
-            get: (date) => moment(date).format("MM/DD/YYYY"),
-        },
-        username: {
-            type: String,
-            required: true,
-        },
-        reactions: [
-            reactionsSchema 
-        ],
-    },
-);
-
-    // Array of nested documents created with the reactionSchema
-    /// Does this need to be first to be called on in thoughtSchema???
+    // Array of nested documents created with the reactionSchema--Must be first to be called below
 const reactionSchema = new Schema(
     {
         reactionId: {
@@ -45,12 +20,41 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: DataTransfer.now,
+            default: Date.now,
             get: (date) => moment(date).format("MM/DD/YYYY"),
         },
     },
 );
 
+const thoughtSchema = new Schema(
+    {
+        thoughtText: {
+            type: String,
+            required: true,
+            maxLength: 280,
+            minLength: 1,
+        },
+
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            get: (date) => moment(date).format("MM/DD/YYYY"),
+        },
+        username: {
+            type: String,
+            required: true
+        },
+        reactions: [reactionSchema],
+    },
+    {
+        toJSON: {
+            virtuals: true,
+        },
+        id: false,
+    }
+);
+
 const Thought = model('thought', thoughtSchema);
+
 
 module.exports = Thought;
