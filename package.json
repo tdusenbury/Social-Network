@@ -6,7 +6,7 @@
     "license": "MIT",
     "scripts": {
       "start": "node server",
-      "watch": "nodemon index",
+      "watch": "nodemon server",
       "seed": "node utils/seed",
       "heroku-postbuild": "node utils/seed.js"
     },
