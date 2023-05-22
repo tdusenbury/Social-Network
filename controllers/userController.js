@@ -103,7 +103,7 @@ module.exports = {
             .then((user) =>
                 !user
                     ? res.status(404).json({ message: 'No user found with that ID' })
-                    : res.json({ message: 'Your friend has been deleted'})
+                    : res.json({ message: 'Your friend has been added'})
             )
             .catch((err) => res.status(500).json(err));
     },
