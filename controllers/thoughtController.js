@@ -68,7 +68,7 @@ module.exports = {
                 : User.findOneAndUpdate(
                     { thoughts: req.params.thoughtId },
                     { $pull: { thoughts: req.params.thoughtId } },
-                    { runValidators: true,new: true }
+                    { runValidators: true, new: true }
                 )
             )
             .then((thought) => 
@@ -84,8 +84,6 @@ module.exports = {
         
 //addReaction
     addReaction(req, res) {
-        // console.log('You have added a reaction');
-        // console.log(req.body);
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $addToSet: { reactions: req.body } },
